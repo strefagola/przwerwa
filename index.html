@@ -36,7 +36,6 @@
                         'pulse-glow': 'pulseGlow 2s infinite alternate',
                         'float': 'float 3s ease-in-out infinite',
                         'spin-slow': 'spin 12s linear infinite',
-                        'radar': 'radar 2s linear infinite',
                     },
                     keyframes: {
                         pulseGlow: {
@@ -93,7 +92,6 @@
 </head>
 <body class="min-h-screen bg-stadium pitch-overlay font-sans flex flex-col justify-between items-center p-4 md:p-8 relative">
 
-    <!-- Ambient Background Lights -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-neon/10 rounded-full blur-3xl pointer-events-none"></div>
 
     <header class="w-full max-w-4xl flex justify-between items-center z-10 py-4">
@@ -102,7 +100,7 @@
             <span class="font-display text-xs md:text-sm font-semibold tracking-widest text-red-400 uppercase">Serwery Offline</span>
         </div>
         <div class="text-xs md:text-sm text-gray-400 font-mono">
-            <i class="fa-solid font-mono fa-clock text-brand-neon mr-1"></i> Status: <span class="text-white">Naprawa w toku</span>
+            <i class="fa-solid font-mono fa-clock text-brand-neon mr-1"></i> Status: <span class="text-white">Prace konserwacyjne</span>
         </div>
     </header>
 
@@ -112,7 +110,6 @@
         <div class="relative group mb-8">
             <div class="absolute -inset-1 bg-gradient-to-r from-brand-neon to-brand-cyan rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse-glow"></div>
             <div class="relative w-36 h-36 md:w-44 md:h-44 rounded-full bg-slate-900 border-2 border-brand-neon/40 flex items-center justify-center p-3 shadow-2xl overflow-hidden">
-                <!-- Logo z fallbackiem w razie braku 'logo.png' -->
                 <img src="logo.png" 
                      alt="Logo Liga PlanetHC" 
                      class="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(0,255,102,0.4)]"
@@ -130,12 +127,12 @@
         </h1>
 
         <p class="text-gray-300 text-base md:text-xl max-w-xl font-normal leading-relaxed mb-8">
-            Przepraszamy za utrudnienia! Aktualnie odnotowujemy <strong class="text-white font-semibold">przeciążenie serwerów</strong> z powodu ogromnego zainteresowania rozgrywkami.
+            Przepraszamy za utrudnienia! Odnotowujemy <strong class="text-white font-semibold">przeciążenie serwerów</strong>. Rozbudowujemy naszą infrastrukturę, aby zapewnić najwyższą płynność rozgrywek.
         </p>
 
-        <!-- Server Load Card -->
+        <!-- Server Load & Countdown Card -->
         <div class="w-full glass-card rounded-2xl p-6 md:p-8 mb-8 text-left shadow-2xl relative overflow-hidden">
-            <div class="flex justify-between items-center mb-3">
+            <div class="flex justify-between items-center mb-4">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 rounded-xl bg-brand-neon/10 border border-brand-neon/20 flex items-center justify-center text-brand-neon">
                         <i class="fa-solid fa-server text-lg"></i>
@@ -149,30 +146,49 @@
             </div>
 
             <!-- Progress Bar -->
-            <div class="w-full bg-gray-800/80 rounded-full h-3.5 p-0.5 border border-gray-700/50 mb-4 overflow-hidden">
+            <div class="w-full bg-gray-800/80 rounded-full h-3.5 p-0.5 border border-gray-700/50 mb-6 overflow-hidden">
                 <div id="progress-bar" class="bg-gradient-to-r from-emerald-500 via-amber-500 to-red-500 h-2.5 rounded-full w-[98%] transition-all duration-1000 relative">
                     <div class="absolute inset-0 bg-white/20 animate-pulse"></div>
                 </div>
             </div>
 
+            <!-- 24H Countdown Timer Display -->
+            <div class="bg-slate-900/80 p-4 rounded-xl border border-brand-neon/20 mb-4 text-center">
+                <div class="text-xs font-mono uppercase tracking-widest text-gray-400 mb-2">
+                    <i class="fa-solid fa-hourglass-half text-brand-neon mr-1"></i> Szacowany czas do powrotu serwerów:
+                </div>
+                <div class="flex justify-center items-center space-x-3 sm:space-x-6 font-display font-black text-2xl sm:text-4xl text-white">
+                    <div class="flex flex-col items-center">
+                        <span id="timer-hours" class="text-brand-neon neon-text-green">24</span>
+                        <span class="text-[10px] font-sans font-normal uppercase tracking-wider text-gray-400 mt-1">Godzin</span>
+                    </div>
+                    <span class="text-brand-neon/60 pb-4">:</span>
+                    <div class="flex flex-col items-center">
+                        <span id="timer-minutes" class="text-white">00</span>
+                        <span class="text-[10px] font-sans font-normal uppercase tracking-wider text-gray-400 mt-1">Minut</span>
+                    </div>
+                    <span class="text-brand-neon/60 pb-4">:</span>
+                    <div class="flex flex-col items-center">
+                        <span id="timer-seconds" class="text-brand-cyan">00</span>
+                        <span class="text-[10px] font-sans font-normal uppercase tracking-wider text-gray-400 mt-1">Sekund</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- Live Animated Status Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 text-xs font-mono">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs font-mono">
                 <div class="bg-slate-900/60 p-2.5 rounded-lg border border-gray-800 flex items-center justify-between">
                     <span class="text-gray-400">Baza danych:</span>
-                    <span class="text-amber-400 font-semibold"><i class="fa-solid fa-rotate mr-1 animate-spin"></i> Synchronizacja</span>
+                    <span class="text-amber-400 font-semibold"><i class="fa-solid fa-rotate mr-1 animate-spin"></i> Optymalizacja</span>
                 </div>
                 <div class="bg-slate-900/60 p-2.5 rounded-lg border border-gray-800 flex items-center justify-between">
                     <span class="text-gray-400">Matchmaking:</span>
                     <span class="text-red-400 font-semibold"><i class="fa-solid fa-pause mr-1"></i> Wstrzymany</span>
                 </div>
-                <div class="bg-slate-900/60 p-2.5 rounded-lg border border-gray-800 flex items-center justify-between">
-                    <span class="text-gray-400">Szacowany powrót:</span>
-                    <span class="text-brand-neon font-semibold"><i class="fa-solid fa-bolt mr-1"></i> <span id="countdown">15:00</span></span>
-                </div>
             </div>
         </div>
 
-        <!-- Message & Action Button -->
+        <!-- Action Button -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
             <button onclick="refreshPage()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-neon to-emerald-500 text-slate-950 font-display font-extrabold tracking-wider uppercase shadow-[0_0_20px_rgba(0,255,102,0.4)] hover:shadow-[0_0_30px_rgba(0,255,102,0.7)] hover:scale-105 active:scale-95 transition duration-200 flex items-center justify-center space-x-3 cursor-pointer">
                 <i class="fa-solid fa-arrows-rotate text-lg" id="refresh-icon"></i>
@@ -186,7 +202,6 @@
 
     </main>
 
-    <!-- Footer / Social Media -->
     <footer class="w-full max-w-4xl z-10 pt-6 border-t border-gray-800/80 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
         <div>
             <p class="text-sm font-semibold text-gray-300">Śledź status na żywo w naszych mediach:</p>
@@ -221,23 +236,33 @@
             }, 600);
         }
 
-        // Countdown timer animation logic
-        let timeInSeconds = 15 * 60; // 15 minutes default
-        const countdownEl = document.getElementById('countdown');
+        // Exact 24-hour Countdown Timer Logic
+        let totalSeconds = 24 * 60 * 60; // 24 hours in seconds
+
+        const hoursEl = document.getElementById('timer-hours');
+        const minutesEl = document.getElementById('timer-minutes');
+        const secondsEl = document.getElementById('timer-seconds');
 
         function updateCountdown() {
-            const minutes = Math.floor(timeInSeconds / 60);
-            const seconds = timeInSeconds % 60;
-            
-            countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            if (timeInSeconds > 0) {
-                timeInSeconds--;
-            } else {
-                timeInSeconds = 300; // Reset to 5 mins if reaches 0
+            if (totalSeconds <= 0) {
+                hoursEl.textContent = '00';
+                minutesEl.textContent = '00';
+                secondsEl.textContent = '00';
+                return;
             }
+
+            const h = Math.floor(totalSeconds / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+            const s = totalSeconds % 60;
+
+            hoursEl.textContent = String(h).padStart(2, '0');
+            minutesEl.textContent = String(m).padStart(2, '0');
+            secondsEl.textContent = String(s).padStart(2, '0');
+
+            totalSeconds--;
         }
 
+        updateCountdown();
         setInterval(updateCountdown, 1000);
 
         // Dynamic progress bar fluctuation effect
