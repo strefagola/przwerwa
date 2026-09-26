@@ -3,368 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liga PlanetHC — Trwa Aktualizacja</title>
-    
+    <title>Liga PlanetHC - Przerwa Techniczna</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Orbitron, Rajdhani, Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-    
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <!-- Google Fonts Inter & Orbitron -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            green: '#10B981',
+                            neon: '#00FF66',
+                            cyan: '#00F0FF',
+                            dark: '#0B0F19',
+                            card: '#111827',
+                            border: '#1F2937'
+                        }
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s infinite alternate',
+                        'float': 'float 3s ease-in-out infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'radar': 'radar 2s linear infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(0, 255, 102, 0.2)' },
+                            '100%': { boxShadow: '0 0 35px rgba(0, 255, 102, 0.6), 0 0 15px rgba(0, 240, 255, 0.4)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #05070f;
+            background-color: #070a11;
             color: #f3f4f6;
             overflow-x: hidden;
         }
 
-        .font-orbitron {
-            font-family: 'Orbitron', sans-serif;
+        /* Stadium Lights & Grid Background */
+        .bg-stadium {
+            background-image: 
+                radial-gradient(circle at 50% 10%, rgba(0, 255, 102, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(0, 240, 255, 0.08) 0%, transparent 50%),
+                linear-gradient(to bottom, rgba(11, 15, 25, 0.85), rgba(7, 10, 17, 0.98)),
+                url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
-        .font-rajdhani {
-            font-family: 'Rajdhani', sans-serif;
+        /* Field Line Pattern Overlay */
+        .pitch-overlay {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         }
 
-        /* Neon Glow Effects */
-        .glow-cyan {
-            box-shadow: 0 0 35px -5px rgba(6, 182, 212, 0.5), 0 0 15px -5px rgba(6, 182, 212, 0.3);
+        .neon-text-green {
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5), 0 0 20px rgba(0, 255, 102, 0.3);
         }
 
-        .glow-purple {
-            box-shadow: 0 0 40px -5px rgba(168, 85, 247, 0.4), 0 0 20px -5px rgba(168, 85, 247, 0.2);
-        }
-
-        .text-glow-cyan {
-            text-shadow: 0 0 12px rgba(6, 182, 212, 0.6), 0 0 24px rgba(6, 182, 212, 0.3);
-        }
-
-        .text-glow-purple {
-            text-shadow: 0 0 15px rgba(168, 85, 247, 0.7), 0 0 30px rgba(168, 85, 247, 0.3);
-        }
-
-        /* Custom Keyframe Animations */
-        @keyframes floatLogo {
-            0%, 100% {
-                transform: translateY(0px) scale(1);
-                filter: drop-shadow(0 0 25px rgba(6, 182, 212, 0.6));
-            }
-            50% {
-                transform: translateY(-12px) scale(1.02);
-                filter: drop-shadow(0 0 45px rgba(168, 85, 247, 0.8));
-            }
-        }
-
-        @keyframes pulseRing {
-            0% {
-                transform: scale(0.85);
-                opacity: 0.8;
-            }
-            50% {
-                transform: scale(1.15);
-                opacity: 0.3;
-            }
-            100% {
-                transform: scale(0.85);
-                opacity: 0.8;
-            }
-        }
-
-        @keyframes shimmerBar {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        @keyframes scanline {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(1000%); }
-        }
-
-        .animate-float-logo {
-            animation: floatLogo 5s ease-in-out infinite;
-        }
-
-        .animate-pulse-ring {
-            animation: pulseRing 4s ease-in-out infinite;
-        }
-
-        .shimmer-progress {
-            background: linear-gradient(90deg, #06b6d4 0%, #a855f7 50%, #3b82f6 100%);
-            background-size: 200% 100%;
-            animation: shimmerBar 3s linear infinite;
-        }
-
-        /* Background Canvas */
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* Glassmorphism Card */
         .glass-card {
-            background: rgba(13, 17, 30, 0.65);
+            background: rgba(17, 24, 39, 0.7);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between items-center relative select-none antialiased overflow-x-hidden">
+<body class="min-h-screen bg-stadium pitch-overlay font-sans flex flex-col justify-between items-center p-4 md:p-8 relative">
 
-    <!-- Interactive Animated Particle Canvas Backdrop -->
-    <canvas id="bg-canvas"></canvas>
+    <!-- Ambient Background Lights -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-neon/10 rounded-full blur-3xl pointer-events-none"></div>
 
-    <!-- Ambient Gradient Blobs for Lighting -->
-    <div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-600/15 rounded-full blur-[140px] pointer-events-none"></div>
-    <div class="fixed bottom-1/4 left-1/2 -translate-x-1/2 translate-y-1/2 w-[600px] h-[600px] bg-purple-600/15 rounded-full blur-[160px] pointer-events-none"></div>
-
-    <!-- Top Status Pill -->
-    <header class="w-full pt-8 z-10 flex justify-center items-center px-4">
-        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/80 border border-cyan-500/30 text-cyan-400 text-xs font-rajdhani uppercase tracking-widest font-semibold shadow-lg">
-            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-            <span>Status Systemu: Konserwacja</span>
+    <header class="w-full max-w-4xl flex justify-between items-center z-10 py-4">
+        <div class="flex items-center space-x-2">
+            <span class="inline-block w-3 h-3 rounded-full bg-red-500 animate-ping"></span>
+            <span class="font-display text-xs md:text-sm font-semibold tracking-widest text-red-400 uppercase">Serwery Offline</span>
+        </div>
+        <div class="text-xs md:text-sm text-gray-400 font-mono">
+            <i class="fa-solid font-mono fa-clock text-brand-neon mr-1"></i> Status: <span class="text-white">Naprawa w toku</span>
         </div>
     </header>
 
-    <!-- Main Central Container -->
-    <main class="w-full max-w-2xl px-4 py-8 my-auto z-10 flex flex-col items-center text-center">
+    <main class="w-full max-w-3xl my-auto py-8 z-10 flex flex-col items-center text-center">
         
-        <div class="glass-card w-full rounded-3xl p-8 md:p-12 relative overflow-hidden group">
-            
-            <!-- Decorative Subtle Grid Overlay Inside Card -->
-            <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
-
-            <!-- LOGO AREA WITH PULSING NEON RING -->
-            <div class="relative flex justify-center items-center mb-8">
-                <!-- Glowing Outer Aura Rings -->
-                <div class="absolute w-48 h-48 rounded-full border border-cyan-500/20 animate-pulse-ring pointer-events-none"></div>
-                <div class="absolute w-60 h-60 rounded-full border border-purple-500/15 animate-pulse-ring pointer-events-none" style="animation-delay: -2s;"></div>
-                
-                <!-- Logo Container -->
-                <div class="relative z-10 w-36 h-36 md:w-44 md:h-44 flex items-center justify-center p-4">
-                    
-                    <!-- ================================================================= -->
-                    <!-- TUTAJ MOŻNA PODMIENIĆ LOGO PLANETHC                               -->
-                    <!-- Zamień atrybut src poniższego <img> na ścieżkę do swojego pliku logo. -->
-                    <!-- Przykład: <img src="logo.png" alt="Liga PlanetHC Logo" ...>        -->
-                    <!-- ================================================================= -->
-                    
-                    <img 
-                        id="planet-logo"
-                        src="https://i.postimg.cc/6QRfy9dz/carrot-orange.png" 
-                        alt="Liga PlanetHC Logo" 
-                        class="w-full h-full object-contain rounded-2xl animate-float-logo transition-transform duration-500 hover:scale-105 cursor-pointer"
-                        onerror="this.onerror=null; this.src='https://placehold.co/400x400/0f172a/00f2fe?text=PlanetHC';"
-                    />
-                    
-                </div>
+        <!-- Logo Section with Glassmorphic Glow Frame -->
+        <div class="relative group mb-8">
+            <div class="absolute -inset-1 bg-gradient-to-r from-brand-neon to-brand-cyan rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse-glow"></div>
+            <div class="relative w-36 h-36 md:w-44 md:h-44 rounded-full bg-slate-900 border-2 border-brand-neon/40 flex items-center justify-center p-3 shadow-2xl overflow-hidden">
+                <!-- Logo z fallbackiem w razie braku 'logo.png' -->
+                <img src="logo.png" 
+                     alt="Logo Liga PlanetHC" 
+                     class="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(0,255,102,0.4)]"
+                     onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\'flex flex-col items-center justify-center text-brand-neon\'><i class=\'fa-solid fa-futbol text-5xl mb-2 animate-bounce\'></i><span class=\'font-display font-black text-lg tracking-wider text-white\'>PLANET<span class=\'text-brand-neon\'>HC</span></span></div>';">
             </div>
-
-            <!-- MAIN HEADING -->
-            <h1 class="font-orbitron font-black text-2xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-100 to-cyan-400 tracking-wide leading-tight mb-3 text-glow-cyan">
-                Liga PlanetHC jest w aktualizacji
-            </h1>
-
-            <p class="text-slate-400 text-sm md:text-base max-w-lg mx-auto mb-8 font-normal leading-relaxed">
-                Pracujemy nad wdrożeniem nowej edycji oraz optymalizacją serwerów. Dziękujemy za cierpliwość — wracamy już wkrótce z nowymi funkcjami!
-            </p>
-
-            <!-- CUSTOM MODERN SPINNER & PROGRESS INDICATOR -->
-            <div class="w-full max-w-md mx-auto flex flex-col items-center gap-4">
-                
-                <!-- Dual Ring Futuristic Loader Spinner -->
-                <div class="relative w-12 h-12 flex items-center justify-center">
-                    <div class="absolute w-full h-full border-4 border-cyan-500/20 border-t-cyan-400 rounded-full animate-spin"></div>
-                    <div class="absolute w-8 h-8 border-4 border-purple-500/20 border-b-purple-500 rounded-full animate-spin" style="animation-direction: reverse; animation-duration: 0.8s;"></div>
-                    <i class="fa-solid fa-gamepad text-cyan-400 text-xs animate-pulse"></i>
-                </div>
-
-                <!-- Animated Progress Bar Container -->
-                <div class="w-full bg-slate-900/90 rounded-full p-1 border border-slate-800 shadow-inner relative overflow-hidden">
-                    <div id="progress-bar" class="h-2.5 rounded-full shimmer-progress w-3/4 transition-all duration-700 ease-out glow-cyan"></div>
-                </div>
-
-                <!-- Dynamic Status Ticker Text -->
-                <div class="flex justify-between items-center w-full text-xs font-rajdhani uppercase tracking-wider text-slate-400 px-1 font-semibold">
-                    <span id="status-step" class="flex items-center gap-1.5 text-cyan-400">
-                        <i class="fa-solid fa-arrows-rotate animate-spin text-[10px]"></i>
-                        <span id="status-text">Aktualizacja plików gry...</span>
-                    </span>
-                    <span id="progress-percent" class="font-orbitron text-purple-400">78%</span>
-                </div>
-
-            </div>
-
-            <!-- Features Highlights / Quick Badges -->
-            <div class="grid grid-cols-3 gap-2 mt-10 pt-6 border-t border-slate-800/80 text-center">
-                <div class="p-2 rounded-xl bg-slate-900/40 border border-slate-800/60">
-                    <i class="fa-solid fa-bolt text-cyan-400 text-sm mb-1 block"></i>
-                    <span class="text-[11px] font-rajdhani uppercase text-slate-300 font-semibold">Wyższa Wydajność</span>
-                </div>
-                <div class="p-2 rounded-xl bg-slate-900/40 border border-slate-800/60">
-                    <i class="fa-solid fa-shield-halved text-purple-400 text-sm mb-1 block"></i>
-                    <span class="text-[11px] font-rajdhani uppercase text-slate-300 font-semibold">Nowy Antycheat</span>
-                </div>
-                <div class="p-2 rounded-xl bg-slate-900/40 border border-slate-800/60">
-                    <i class="fa-solid fa-trophy text-amber-400 text-sm mb-1 block"></i>
-                    <span class="text-[11px] font-rajdhani uppercase text-slate-300 font-semibold">Nowy Sezon</span>
-                </div>
-            </div>
-
         </div>
+
+        <!-- Heading & Badges -->
+        <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-brand-neon/10 border border-brand-neon/30 text-brand-neon font-display text-xs tracking-wider uppercase mb-4">
+            <i class="fa-solid fa-triangle-exclamation mr-2 text-amber-400"></i> Przerwa Techniczna
+        </div>
+
+        <h1 class="font-display text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-white uppercase mb-4">
+            Liga <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-cyan neon-text-green">PlanetHC</span>
+        </h1>
+
+        <p class="text-gray-300 text-base md:text-xl max-w-xl font-normal leading-relaxed mb-8">
+            Przepraszamy za utrudnienia! Aktualnie odnotowujemy <strong class="text-white font-semibold">przeciążenie serwerów</strong> z powodu ogromnego zainteresowania rozgrywkami.
+        </p>
+
+        <!-- Server Load Card -->
+        <div class="w-full glass-card rounded-2xl p-6 md:p-8 mb-8 text-left shadow-2xl relative overflow-hidden">
+            <div class="flex justify-between items-center mb-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-brand-neon/10 border border-brand-neon/20 flex items-center justify-center text-brand-neon">
+                        <i class="fa-solid fa-server text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-sm md:text-base font-bold text-white uppercase">Obciążenie Infrastruktury</h3>
+                        <p class="text-xs text-gray-400">Prace optymalizacyjne w toku</p>
+                    </div>
+                </div>
+                <span class="font-display font-bold text-lg md:text-xl text-amber-400 animate-pulse">98% CAP</span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-800/80 rounded-full h-3.5 p-0.5 border border-gray-700/50 mb-4 overflow-hidden">
+                <div id="progress-bar" class="bg-gradient-to-r from-emerald-500 via-amber-500 to-red-500 h-2.5 rounded-full w-[98%] transition-all duration-1000 relative">
+                    <div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+                </div>
+            </div>
+
+            <!-- Live Animated Status Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 text-xs font-mono">
+                <div class="bg-slate-900/60 p-2.5 rounded-lg border border-gray-800 flex items-center justify-between">
+                    <span class="text-gray-400">Baza danych:</span>
+                    <span class="text-amber-400 font-semibold"><i class="fa-solid fa-rotate mr-1 animate-spin"></i> Synchronizacja</span>
+                </div>
+                <div class="bg-slate-900/60 p-2.5 rounded-lg border border-gray-800 flex items-center justify-between">
+                    <span class="text-gray-400">Matchmaking:</span>
+                    <span class="text-red-400 font-semibold"><i class="fa-solid fa-pause mr-1"></i> Wstrzymany</span>
+                </div>
+                <div class="bg-slate-900/60 p-2.5 rounded-lg border border-gray-800 flex items-center justify-between">
+                    <span class="text-gray-400">Szacowany powrót:</span>
+                    <span class="text-brand-neon font-semibold"><i class="fa-solid fa-bolt mr-1"></i> <span id="countdown">15:00</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message & Action Button -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
+            <button onclick="refreshPage()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-neon to-emerald-500 text-slate-950 font-display font-extrabold tracking-wider uppercase shadow-[0_0_20px_rgba(0,255,102,0.4)] hover:shadow-[0_0_30px_rgba(0,255,102,0.7)] hover:scale-105 active:scale-95 transition duration-200 flex items-center justify-center space-x-3 cursor-pointer">
+                <i class="fa-solid fa-arrows-rotate text-lg" id="refresh-icon"></i>
+                <span>Sprawdź Dostępność</span>
+            </button>
+        </div>
+
+        <p class="text-xs text-gray-400 mt-4">
+            <i class="fa-solid fa-circle-check text-brand-neon mr-1"></i> Wrócimy jak najszybciej! Dziękujemy za cierpliwość.
+        </p>
 
     </main>
 
-    <!-- FOOTER WITH EMERGE IT BRANDING -->
-    <footer class="w-full py-6 z-10 text-center px-4">
-        <div class="inline-flex flex-col sm:flex-row items-center justify-center gap-2 text-xs text-slate-400 font-medium">
-            <span>&copy; <span id="year">2026</span> Liga PlanetHC. Wszelkie prawa zastrzeżone.</span>
-            <span class="hidden sm:inline text-slate-600">•</span>
-            <div class="flex items-center gap-1.5 bg-slate-900/80 px-3 py-1 rounded-full border border-slate-800 shadow-sm">
-                <span class="text-slate-400">Projekt i realizacja:</span>
-                <span class="font-orbitron font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 tracking-wider hover:opacity-90 transition-opacity cursor-pointer">
-                    EMERGE IT
-                </span>
-            </div>
+    <!-- Footer / Social Media -->
+    <footer class="w-full max-w-4xl z-10 pt-6 border-t border-gray-800/80 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+        <div>
+            <p class="text-sm font-semibold text-gray-300">Śledź status na żywo w naszych mediach:</p>
+            <p class="text-xs text-gray-500">© 2026 Liga PlanetHC. Wszelkie prawa zastrzeżone.</p>
+        </div>
+
+        <!-- Social Media Buttons -->
+        <div class="flex space-x-3">
+            <a href="https://discord.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-900 border border-gray-800 flex items-center justify-center text-gray-300 hover:text-white hover:bg-indigo-600 hover:border-indigo-500 hover:shadow-[0_0_15px_rgba(79,70,229,0.5)] transition duration-300" title="Discord">
+                <i class="fa-brands fa-discord text-lg"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-900 border border-gray-800 flex items-center justify-center text-gray-300 hover:text-white hover:bg-blue-600 hover:border-blue-500 hover:shadow-[0_0_15px_rgba(37,99,235,0.5)] transition duration-300" title="Facebook">
+                <i class="fa-brands fa-facebook-f text-lg"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-900 border border-gray-800 flex items-center justify-center text-gray-300 hover:text-white hover:bg-pink-600 hover:border-pink-500 hover:shadow-[0_0_15px_rgba(219,39,119,0.5)] transition duration-300" title="Instagram">
+                <i class="fa-brands fa-instagram text-lg"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-900 border border-gray-800 flex items-center justify-center text-gray-300 hover:text-white hover:bg-red-600 hover:border-red-500 hover:shadow-[0_0_15px_rgba(220,38,38,0.5)] transition duration-300" title="YouTube">
+                <i class="fa-brands fa-youtube text-lg"></i>
+            </a>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT: Background Particles & Interactive Effects -->
     <script>
-        // Canvas Particle Background Generator
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            initParticles();
-        });
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.radius = Math.random() * 2 + 0.5;
-                this.color = Math.random() > 0.5 ? 'rgba(6, 182, 212, ' : 'rgba(168, 85, 247, ';
-                this.alpha = Math.random() * 0.6 + 0.2;
-                this.vx = (Math.random() - 0.5) * 0.4;
-                this.vy = (Math.random() - 0.5) * 0.4;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = this.color + this.alpha + ')';
-                ctx.fill();
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0) this.x = width;
-                if (this.x > width) this.x = 0;
-                if (this.y < 0) this.y = height;
-                if (this.y > height) this.y = 0;
-            }
-        }
-
-        let particles = [];
-        function initParticles() {
-            particles = [];
-            const count = Math.min(Math.floor((width * height) / 12000), 90);
-            for (let i = 0; i < count; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function animateCanvas() {
-            ctx.clearRect(0, 0, width, height);
-            
-            // Draw connecting lines if particles are close
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 120) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(14, 165, 233, ${0.15 * (1 - dist / 120)})`;
-                        ctx.lineWidth = 0.6;
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-
-            requestAnimationFrame(animateCanvas);
-        }
-
-        initParticles();
-        animateCanvas();
-
-        // Simulated Dynamic Progress & Status Cycler
-        const statusSteps = [
-            "Optymalizacja bazy danych...",
-            "Wdrażanie nowego sezonu...",
-            "Aktualizacja silnika serwera...",
-            "Sprawdzanie zabezpieczeń...",
-            "Finalizacja i testy końcowe..."
-        ];
-
-        let currentStepIndex = 0;
-        let progress = 78;
-
-        const statusTextEl = document.getElementById('status-text');
-        const progressBarEl = document.getElementById('progress-bar');
-        const progressPercentEl = document.getElementById('progress-percent');
-
-        // Cycle through status messages periodically
-        setInterval(() => {
-            currentStepIndex = (currentStepIndex + 1) % statusSteps.length;
-            statusTextEl.style.opacity = '0';
+        // Refresh button logic
+        function refreshPage() {
+            const icon = document.getElementById('refresh-icon');
+            icon.classList.add('animate-spin');
             
             setTimeout(() => {
-                statusTextEl.innerText = statusSteps[currentStepIndex];
-                statusTextEl.style.opacity = '1';
-            }, 300);
+                window.location.reload();
+            }, 600);
+        }
 
-            // Subtle smooth organic fluctuation in simulated progress
-            progress += (Math.random() * 2 - 0.8);
-            if (progress > 96) progress = 75;
-            if (progress < 60) progress = 60;
+        // Countdown timer animation logic
+        let timeInSeconds = 15 * 60; // 15 minutes default
+        const countdownEl = document.getElementById('countdown');
 
-            const roundedProgress = Math.round(progress);
-            progressBarEl.style.width = roundedProgress + '%';
-            progressPercentEl.innerText = roundedProgress + '%';
+        function updateCountdown() {
+            const minutes = Math.floor(timeInSeconds / 60);
+            const seconds = timeInSeconds % 60;
+            
+            countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeInSeconds > 0) {
+                timeInSeconds--;
+            } else {
+                timeInSeconds = 300; // Reset to 5 mins if reaches 0
+            }
+        }
 
-        }, 4000);
+        setInterval(updateCountdown, 1000);
 
-        // Dynamic Copyright Year Update
-        document.getElementById('year').innerText = new Date().getFullYear();
+        // Dynamic progress bar fluctuation effect
+        const progressBar = document.getElementById('progress-bar');
+        setInterval(() => {
+            const randomPercent = Math.floor(Math.random() * (99 - 92 + 1)) + 92;
+            progressBar.style.width = `${randomPercent}%`;
+        }, 3000);
     </script>
 </body>
 </html>
